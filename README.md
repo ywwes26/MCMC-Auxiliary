@@ -3,6 +3,7 @@ Collection of codes to replicate the simulation results in the paper: [Markov Ch
 
 ## Dependencies
 [Julia 1.10.0](https://julialang.org)
+[Matplotlib](https://matplotlib.org) for plots
 
 ## Heterogeneous truncated Gaussian
 Folder `hetero-trunc-gaussian` contains the source codes to replicate the simulation results in Section 5.1. Executing the file `TruncGaussian.jl` will output a jld2 file containing the samples, time per step and number of accepts for all MCMC algorithms. Parameters such as the target accept rate and step sizes can be changed manually inside this file.
