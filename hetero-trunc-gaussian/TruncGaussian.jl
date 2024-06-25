@@ -442,7 +442,6 @@ function run_sampler(theta_init::Array{Float64,1}, stepsize::Array{Float64,1}, s
     params_poismh = Params(y, prec_y, dim, args["beta"], args["lam_const"], stepsize[3], steps[3])
     params_poisbarker = Params(y, prec_y, dim, args["beta"], args["lam_const"], stepsize[4], steps[4])
     params_poismala = Params(y, prec_y, dim, args["beta"], args["lam_const"], stepsize[5], steps[5])
-    params_hmc = Params(y, prec_y, dim, args["beta"], args["lam_const"], stepsize[6], steps[6])
 
     # a large step of rejection sampling to estimate true theta
     theta_true_untrunc = rand(MvNormal(vec(mean(y, dims=2)), cov_y./(size(y)[2]*args["beta"])), 1000000)
@@ -479,7 +478,7 @@ if (target_rate == 0.55)
     stepsize_list = [0.15, 0.27, 0.14, 0.4, 0.275]
 end
 
-steps = [5000, 2500, 50000, 20000, 20000, 2000]
+steps = [5000, 2500, 50000, 20000, 20000]
 
 mh_samples, mala_samples, poismh_samples, poisbarker_samples, poismala_samples, theta_true, time_mh, time_mala, time_poismh, time_poisbarker, time_poismala, accept_mh, accept_mala, accept_poismh, accept_poisbarker, accept_poismala = run_sampler(theta_init, stepsize_list, steps)
 
