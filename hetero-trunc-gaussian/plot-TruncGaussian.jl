@@ -9,7 +9,7 @@ using MultivariateStats
 using JLD2, FileIO
 # change target rate accordingly to produce all plots
 target_rate = 0.25
-@load "TruncGaussin-dim20-data_size100000-lam_const0.0005-target_rate$(target_rate)-beta1.0e-5.jld2" theta_init mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples theta_true time_mh time_mala time_poismh time_poisbarker time_poismala accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala
+@load "TruncGaussin-dim20-data_size100000-lam_const0.0005-target_rate$(target_rate)-beta1.0e-5.jld2" theta_init mean_true cov_true mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples time_mh time_mala time_poismh time_poisbarker time_poismala accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala
 
 
 MSE_mean_mh = zeros(4000)
