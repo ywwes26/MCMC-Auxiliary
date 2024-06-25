@@ -591,7 +591,7 @@ function save_params_to_file()
     df = args["df"]
     lam_const = args["lam_const"]
     beta = args["beta"]
-    filename = """RobustLinReg-dim$(dim)-data_size$(data_size)-c$(c)-df$(df)-lam_const$(lam_const)-target_rate$(target_rate)-beta$(beta)""" * ".jld2"
+    filename = """RobustLinReg-dim$(dim)-data_size$(data_size)-c$(c)-df$(df)-lam_const$(lam_const)-beta$(beta)-target_rate$(target_rate)""" * ".jld2"
     @save filename theta_init mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples hmc_samples theta_true time_mh time_mala time_poismh time_poisbarker time_poismala time_hmc accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala accept_hmc
 end
 save_params_to_file()
