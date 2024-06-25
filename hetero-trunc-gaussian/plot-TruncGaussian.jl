@@ -12,12 +12,11 @@ target_rate = 0.25
 @load "TruncGaussin-dim20-data_size100000-lam_const0.0005-target_rate$(target_rate)-beta1.0e-5.jld2" theta_init mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples theta_true time_mh time_mala time_poismh time_poisbarker time_poismala accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala
 
 
-MSE_mh = zeros(4000)
-MSE_mala = zeros(4000)
-MSE_poismh = zeros(40000)
-MSE_poisbarker = zeros(20000)
-MSE_poismala = zeros(20000)
-MSE_hmc = zeros(2000)
+MSE_mean_mh = zeros(4000)
+MSE_mean_mala = zeros(4000)
+MSE_mean_poismh = zeros(40000)
+MSE_mean_poisbarker = zeros(20000)
+MSE_mean_poismala = zeros(20000)
 
 
 # get MSE for every step
