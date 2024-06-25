@@ -6,6 +6,7 @@ using LaTeXStrings
 
 l = @layout [a b; c d]
 
+# make sure to have the results for all step sizes in the working directory beore producing the plots
 
 # step size = 8e-4
 @load "35_MH_stepsize8e-4_step10000.jld2" acc acc_time
