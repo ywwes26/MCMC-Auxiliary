@@ -2,7 +2,8 @@
 Collection of codes to replicate the simulation results in the paper: [Markov Chain Monte Carlo without evaluating the target: an auxiliary variable approach](https://arxiv.org/abs/2406.05242)
 
 ## Dependencies
-[Julia 1.10.0](https://julialang.org)\\
+[Julia 1.10.0](https://julialang.org)
+
 [Matplotlib](https://matplotlib.org) for plots
 
 ## Heterogeneous truncated Gaussian
