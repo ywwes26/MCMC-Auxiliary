@@ -27,23 +27,25 @@ MSE_cov_poismala = zeros(20000)
 
 
 # get MSE for every step
-for j in 1:4000
-    MSE_mh[j] = mean((mean(mh_samples[:, 1:(j*1)], dims=2) .- theta_true).^2)
+for j in 1:5000
+    MSE_mean_mh[j] = mean((mean(mh_samples[:, 1:(j*1)], dims=2) .- mean_true).^2)
+    MSE_cov_mh[j] = mean((diag(cov(mh_samples[:, 1:(j*1)]')) .- cov_true).^2)
 end
-for j in 1:4000
-    MSE_mala[j] = mean((mean(mala_samples[:, 1:(j*1)], dims=2) .- theta_true).^2)
+for j in 1:2500
+    MSE_mean_mala[j] = mean((mean(mala_samples[:, 1:(j*1)], dims=2) .- mean_true).^2)
+    MSE_cov_mh[j] = mean((diag(cov(mala_samples[:, 1:(j*1)]')) .- cov_true).^2)
 end
-for j in 1:40000
-    MSE_poismh[j] = mean((mean(poismh_samples[:, 1:(j*1)], dims=2) .- theta_true).^2)
+for j in 1:50000
+    MSE_mean_poismh[j] = mean((mean(poismh_samples[:, 1:(j*1)], dims=2) .- mean_true).^2)
+    MSE_cov_poismh[j] = mean((diag(cov(poismh_samples[:, 1:(j*1)]')) .- cov_true).^2)
 end
 for j in 1:20000
-    MSE_poisbarker[j] = mean((mean(poisbarker_samples[:, 1:(j*1)], dims=2) .- theta_true).^2)
+    MSE_mean_poisbarker[j] = mean((mean(poisbarker_samples[:, 1:(j*1)], dims=2) .- mean_true).^2)
+    MSE_cov_poisbarker[j] = mean((diag(cov(poisbarker_samples[:, 1:(j*1)]')) .- cov_true).^2)
 end
 for j in 1:20000
-    MSE_poismala[j] = mean((mean(poismala_samples[:, 1:(j*1)], dims=2) .- theta_true).^2)
-end
-for j in 1:2000
-    MSE_hmc[j] = mean((mean(hmc_samples[:, 1:(j*1)], dims=2) .- theta_true).^2)
+    MSE_mean_poismala[j] = mean((mean(poismala_samples[:, 1:(j*1)], dims=2) .- mean_true).^2)
+    MSE_cov_poismala[j] = mean((diag(cov(poismala_samples[:, 1:(j*1)]')) .- cov_true).^2)
 end
 
 
