@@ -9,7 +9,7 @@ using MultivariateStats
 using JLD2, FileIO
 # change target rate accordingly to produce all plots
 target_rate = 0.25
-@load "RobustLinReg-dim10-data_size100000-c15.0-df4-lam_const0.01-target_rate$(target_rate)-beta0.0001.jld2" theta_init mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples hmc_samples theta_true time_mh time_mala time_poismh time_poisbarker time_poismala time_hmc accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala accept_hmc
+@load "RobustLinReg-dim10-data_size100000-c15.0-df4-lam_const0.01-beta0.0001-target_rate$(target_rate).jld2" theta_init mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples hmc_samples theta_true time_mh time_mala time_poismh time_poisbarker time_poismala time_hmc accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala accept_hmc
 
 
 MSE_mh = zeros(4000)
