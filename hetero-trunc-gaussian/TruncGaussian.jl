@@ -492,7 +492,7 @@ function save_params_to_file()
     lam_const =  args["lam_const"]
     mean_true = mean(theta_true, dims=1)[1]
     cov_true = diag(cov(theta_true))
-    filename = """TruncGaussian-dim$(dim)-data_size$(data_size)-lam_const$(lam_const)-target_rate$(target_rate)-beta$(beta)-round$(round)""" * ".jld2"
+    filename = """TruncGaussian-dim$(dim)-data_size$(data_size)-lam_const$(lam_const)-target_rate$(target_rate)-beta$(beta)""" * ".jld2"
     @save filename theta_init mean_true cov_true mh_samples mala_samples poismh_samples poisbarker_samples poismala_samples time_mh time_mala time_poismh time_poisbarker time_poismala accept_mh accept_mala accept_poismh accept_poisbarker accept_poismala
 end
 save_params_to_file()
