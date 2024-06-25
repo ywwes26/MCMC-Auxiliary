@@ -11,4 +11,4 @@ Folder `robust-lin-reg` contains the source codes to replicate the simulation re
 Folder `bayes-logistic-reg` contains the source codes to replicate the simulation results in Section 5.3. Each algorithm is implemented in separate files labeled by their respective names. For example, executing `TunaMH-SGLD.jl` will output a file containing the simulation results for TunaMH-SGLD. To reproduce Figure 5 in the paper, see `plot-mnist.jl` for details.
 
 ## Acknowledgement
-This implementaion is based on the previous implementation of PoissonMH and TunaMH [https://github.com/ruqizhang/tunamh].
+The implementaion in this repository is based on the previous implementation of PoissonMH and TunaMH, available at https://github.com/ruqizhang/tunamh.
