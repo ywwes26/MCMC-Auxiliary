@@ -25,7 +25,7 @@ function parse_commandline()
             arg_type = Int64
             default = 20
         "--lam_const"
-            help = "coefficient for lambda"
+            help = "coefficient for lambda=lam_const*L^2"
             arg_type = Float64
             default = 0.0005
         "--beta"
