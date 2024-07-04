@@ -557,7 +557,7 @@ end
 
 # parse arguments and set initial theta
 args = parse_commandline()
-
+theta_init = randn(args["dim"])
 
 # set step sizes for each algorithm
 target_rate = 0.25
@@ -578,7 +578,6 @@ steps = [4000, 4000, 40000, 20000, 20000, 2000]
 
 
 # execute sampling
-theta_init = randn(args["dim"])
 mh_samples, mala_samples, poismh_samples, poisbarker_samples, poismala_samples, hmc_samples, theta_true, time_mh, time_mala, time_poismh, time_poisbarker, time_poismala, time_hmc, accept_mh, accept_mala, accept_poismh, accept_poisbarker, accept_poismala, accept_hmc = run_sampler(theta_init, stepsize_list, steps)
 
 
