@@ -1,22 +1,22 @@
 # Auxiliary-MCMC
-Collection of codes to replicate the simulation results in paper: [Markov Chain Monte Carlo without evaluating the target: an auxiliary variable approach](https://arxiv.org/abs/2406.05242)
+Collection of code to reproduce the simulation results in the paper: [Markov Chain Monte Carlo without evaluating the target: an auxiliary variable approach](https://arxiv.org/abs/2406.05242)
 
 ## Install Julia and Dependencies
 
-Download and install Julia v1.10.0 for your operating system at https://julialang.org/downloads/oldreleases/
+Download and install Julia v1.10.0 for your operating system from https://julialang.org/downloads/oldreleases/
 
-Clone the GitHub repo:
+Clone the GitHub repository:
 ```bash
 git clone https://github.com/ywwes26/Auxiliary-MCMC.git
 ```
 
-Change the directory to the repo and launch Julia:
+Change the directory to the repository and launch Julia:
 ```bash
 cd Auxiliary-MCMC
 julia --project=.
 ```
 
-Install required packages:
+Install the required packages:
 ```julia
 using Pkg
 Pkg.instantiate()
@@ -24,7 +24,7 @@ Pkg.instantiate()
 
 ## Run Experiments
 
-The source codes for each algorithm are provided in `src`, the scripts to run each experiment are provided in `scripts`, and the codes to compute ESS/s and KS-statistic are provided in `eval`.
+The source code for each algorithm is provided in `src`, the scripts for running experiments are in `scripts`, and the code for computing ESS/s and KS statistics is in `eval`.
 
 ### 20-Dimensional Truncated Gaussian Example
 
@@ -34,7 +34,7 @@ The experiment can be run for a single round, e.g., with `target_rate=0.55`:
 julia --project=. scripts/run_gaussian_20d.jl --target_rate 0.55 --round 1
 ```
 
-Multiple rounds can be run using a for loop (which can be slow):
+Multiple rounds can be run using a for loop (this may be slow):
 
 ```bash
 for rate in 0.25 0.4 0.55; do
@@ -45,12 +45,13 @@ for rate in 0.25 0.4 0.55; do
   done
 done
 ```
-The output (posterior samples trajectory, cumulative runtime trajectory for corresponding samples, etc) will be saved as `.jld2` files under `results/gaussian_20d` for evaluation.
 
-If HPC is available, we recommend to run the experiments using SLURM job array (parallel and fast):
+The output (e.g., posterior sample trajectories, cumulative runtime trajectories, etc.) will be saved as `.jld2` files under `results/gaussian_20d` for evaluation.
+
+If HPC resources are available, we recommend running the experiments using a SLURM job array (parallel and faster):
 
 1. Create the run file `run.slurm`:
-```
+```bash
 #!/bin/bash
 #SBATCH --job-name=gaussian20d
 #SBATCH --output=logs/gaussian_%A_%a.out
@@ -75,18 +76,18 @@ julia --project=. scripts/run_gaussian_20d.jl \
   --round $round
 ```
 
-2. Create log directory:
+2. Create the log directory:
 
 ```bash
 mkdir -p logs
 ```
 
-3. Submit jobs:
+3. Submit the jobs:
 ```bash
 sbatch run.slurm
 ```
 
-The number of steps for each algorithm is customizable:
+The number of steps for each algorithm can be customized:
 
 ```bash
 julia --project=. scripts/run_gaussian_20d.jl \
@@ -103,7 +104,7 @@ julia --project=. scripts/run_gaussian_20d.jl \
 
 ### Robust Regression Example
 
-Configurations for all 3 settings in the paper are provided:
+Configurations for all three settings in the paper are provided:
 
 | Experiment Name          | Dimension | Sample Size |
 |------------------------|-----------|-------------|
@@ -111,7 +112,8 @@ Configurations for all 3 settings in the paper are provided:
 | robust_reg_50d_n100000 | 50        | 100000      |
 | robust_reg_10d_n200000 | 10        | 200000      |
 
-Run experiment for configuration `robust_reg_10d_n100000` with `target_rate=0.55`:
+Run the experiment for configuration `robust_reg_10d_n100000` with `target_rate=0.55`:
+
 ```bash
 julia --project=. scripts/run_robust_reg.jl \
   --experiment robust_reg_10d_n100000 \
@@ -119,19 +121,19 @@ julia --project=. scripts/run_robust_reg.jl \
   --round 1
 ```
 
-The output (posterior samples trajectory, cumulative runtime trajectory for corresponding samples, etc) will be saved as `.jld2` files under `results/robust_reg/` for evaluation。
+The output (e.g., posterior sample trajectories, cumulative runtime trajectories, etc.) will be saved as `.jld2` files under `results/robust_reg/` for evaluation.
 
-Running multiple rounds and changing the number of steps for algorithms are similar to the truncated Gaussian example.
+Running multiple rounds and adjusting the number of steps for each algorithm are similar to the truncated Gaussian example.
 
 ### Bayesian Logistic Regression Example on MNIST
 
-Run all algorithms on classiying 3's and 5's (or 7's and 9's by `--task mnist79`):
+Run all algorithms for classifying 3's and 5's (or 7's and 9's using `--task mnist79`):
 
 ```bash
 julia --project=. scripts/run_bayes_logistic_reg.jl --run_all --task mnist35
 ```
 
-The number of steps (`nsamples`) and step sizes can be specified by:
+The number of steps (`nsamples`) and step sizes can be specified as follows:
 
 ```bash
 julia --project=. scripts/run_bayes_logistic_reg.jl \
@@ -153,7 +155,7 @@ julia --project=. scripts/run_bayes_logistic_reg.jl \
   --barker_nsamples 10000
 ```
 
-To run experiment for a single algorithm:
+To run a single algorithm:
 
 ```bash
 julia --project=. scripts/run_bayes_logistic_reg.jl \
@@ -163,27 +165,29 @@ julia --project=. scripts/run_bayes_logistic_reg.jl \
   --nsamples 100000
 ```
 
-The output (posterior samples trajectory, corresponding test accuracy trajectory and runtime trajectory, etc) will be saved as `.jld2` files under `results/bayes_logistic_reg/` with filename `<task>_<method>_pca<pca_dim>_step<stepsize>_n<nsamples>_burn<burnin>_seed<seed>.jld2`.
-
+The output (e.g., posterior samples, test accuracy trajectories, runtime trajectories, etc.) will be saved as `.jld2` files under `results/bayes_logistic_reg/`, with filenames of the form  
+`<task>_<method>_pca<pca_dim>_step<stepsize>_n<nsamples>_burn<burnin>_seed<seed>.jld2`.
 
 ## Evaluation
 
-The scripts in `eval` will automatically detect the output files with different `target_rate` and `round` paramenters in the `results` folder, and for each `target_rate`, different rounds will be aggregated for computing evaluation metrics.
+The scripts in `eval` automatically detect output files with different `target_rate` and `round` parameters in the `results` directory. For each `target_rate`, results from different rounds are aggregated to compute evaluation metrics.
 
-Computing ESS/s for truncated Gaussian example:
+Computing ESS/s for the truncated Gaussian example:
 ```bash
 julia --project=. eval/ess_gaussian_20d.jl
 ```
 
-Computing ESS/s for robust regression example:
+Computing ESS/s for the robust regression example:
 ```bash
 julia --project=. eval/ess_robust_reg.jl --experiment robust_reg_10d_n100000
 ```
 
-Computing KS statistics for truncated Gaussian example (to compute KS statistics, flag `--save_theta_true` should be added when running experiments, this is omiited by default since it takes a lot of disk space):
+Computing KS statistics for the truncated Gaussian example (`--save_theta_true` must be enabled when running the experiments in order to compute KS statistics. This option is disabled by default because saving the reference samples requires substantial disk space):
 ```bash
 julia --project=. eval/ks_gaussian_20d.jl
 ```
 
 ## Acknowledgement
-The implementaion in this repository is based on the original implementation of PoissonMH and TunaMH, available at https://github.com/ruqizhang/tunamh.
+
+The implementation in this repository is based on the original implementations of PoissonMH and TunaMH, available at https://github.com/ruqizhang/tunamh.
+
