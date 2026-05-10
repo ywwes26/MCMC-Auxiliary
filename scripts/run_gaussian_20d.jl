@@ -86,7 +86,7 @@ function parse_commandline()
 
         "--sgld_steps"
             arg_type = Int64
-            default = 100000
+            default = 2500000
     end
 
     return parse_args(s)
