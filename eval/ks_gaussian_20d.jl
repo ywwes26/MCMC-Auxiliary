@@ -21,7 +21,7 @@ const BURNINS = Dict(
     "PoisMH-Barker" => 4000,
     "PoisMALA" => 4000,
     "Barker" => 1000,
-    "SGLD" => 20000,
+    "SGLD" => 500000,
 )
 
 const THINS = Dict(
